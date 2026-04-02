@@ -14,7 +14,7 @@ Use this for **local research, testing, and tooling** around BOF object files. L
 From the repository root:
 
 ```text
-php COFFI.php <file.o> [args...]
+php coffi.php <file.o> [args...]
 ```
 
 The loader expects an **AMD64 COFF** object. It looks for a **`go`** or **`_go`** symbol; if none is found, it loads the image and exits without executing.
@@ -39,7 +39,7 @@ No arguments produces a minimal empty pack (`\0\0\0\0`).
 
 ```php
 <?php
-require 'COFFI.php';
+require 'coffi.php';
 
 $loader = new CoffLoader();
 $img = $loader->load('path\to\bof.x64.o', []); // optional $externs: symbol => virtual address (int)
@@ -59,7 +59,7 @@ $loader->runGoInWorkerThread((int) $img['goVa'], $buf, $len);
 
 | Path | Role |
 |------|------|
-| `COFFI.php` | Loader, CLI, and `CoffLoader` implementation. |
+| `coffi.php` | Loader, CLI, and `CoffLoader` implementation. |
 | `bofs/` | Built `.o` files for testing (if present). |
 | `src/portscan/portscan_simple.c` | Example BOF source. |
 | `scripts/build_portscan_wsl.sh` | Fetch Beacon headers and compile the portscan object with MinGW from WSL. |
@@ -68,13 +68,7 @@ $loader->runGoInWorkerThread((int) $img['goVa'], $buf, $len);
 
 ### Running `test_bofs.py`
 
-The script expects a loader file named `bof_loader.php` at the repo root. Either copy or symlink:
-
-```text
-copy COFFI.php bof_loader.php
-```
-
-Then:
+From the repo root (with `coffi.php` present):
 
 ```text
 python test_bofs.py

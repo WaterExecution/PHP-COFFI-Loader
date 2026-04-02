@@ -1090,7 +1090,7 @@ function bofCliBuildArgpack(array $tokens): string
 $argv0 = (string) ($_SERVER['argv'][0] ?? '');
 if (PHP_SAPI === 'cli' && $argv0 !== '' && @realpath($argv0) === realpath(__FILE__)) {
     if (($argc ?? 0) < 2) {
-        fwrite(STDERR, "Usage: php bof_loader.php <file.o> [args...]\n");
+        fwrite(STDERR, "Usage: php coffi.php <file.o> [args...]\n");
         fwrite(STDERR, "  Raw token → narrow Beacon str; BOFs needing bof_pack \"Z\" need wstr:C:\\\\path.\n");
         fwrite(STDERR, "  Typed: str:S, wstr:S, int:N, short:N, bin:BASE64 (str/wstr strip quotes; C:/ → C:\\\\).\n");
         fwrite(STDERR, "  Legacy: one argument of even-length hex → raw packed bytes.\n");

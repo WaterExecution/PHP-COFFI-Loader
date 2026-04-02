@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Run php bof_loader.php against every *.o under bofs/ and report exit code + output.
+Run php coffi.php against every *.o under bofs/ and report exit code + output.
 
 Layout:
-  bof_loader.php   — loader (repo root)
+  coffi.php        — loader (repo root)
   bofs/*.o         — object files
   test_bofs.py     — this script (repo root)
 
@@ -23,9 +23,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent
 BOFS_DIR = REPO_ROOT / "bofs"
-LOADER = REPO_ROOT / "bof_loader.php"
+LOADER = REPO_ROOT / "coffi.php"
 
-# Extra CLI tokens after <file.o> (per bof_loader.php bofCliBuildArgpack).
+# Extra CLI tokens after <file.o> (per coffi.php bofCliBuildArgpack).
 # Typed: str:, wstr:, int:, short:, bin:
 BOF_EXTRA_ARGS: dict[str, list[str]] = {
     "dir.x64.o": ["C:\\"],
@@ -94,7 +94,7 @@ def run_one(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Test all BOFs in bofs/ with bof_loader.php")
+    parser = argparse.ArgumentParser(description="Test all BOFs in bofs/ with coffi.php")
     parser.add_argument("--php", default="php", help="php executable (default: php on PATH)")
     parser.add_argument(
         "--repo",
@@ -112,7 +112,7 @@ def main() -> int:
     args = parser.parse_args()
 
     repo: Path = args.repo.resolve()
-    loader = repo / "bof_loader.php"
+    loader = repo / "coffi.php"
     bofs_dir = repo / "bofs"
 
     if not loader.is_file():
